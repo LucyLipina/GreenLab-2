@@ -1,0 +1,674 @@
+GREENLAB 2 · ПРОТОКОЛ
+{
+  "createdAt": "2026-11-14T09:02:52.731Z",
+  "tests": [
+    {
+      "name": "D1 (2.1): h=39.9 — старт полива",
+      "steps": [
+        {
+          "input": {
+            "humidity": 39.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "D2 (2.1): h=40 — граница, удержание",
+      "steps": [
+        {
+          "input": {
+            "humidity": 40,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "D3 (2.1): h=44.9 — удержание ON",
+      "steps": [
+        {
+          "input": {
+            "humidity": 20,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          }
+        },
+        {
+          "input": {
+            "humidity": 44.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "D4 (2.1): h=45 — выключение",
+      "steps": [
+        {
+          "input": {
+            "humidity": 45,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          }
+        }
+      ]
+    }
+  ],
+  "reference": [
+    {
+      "name": "D1 (2.1): h=39.9 — старт полива",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 39.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": false,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D2 (2.1): h=40 — граница, удержание",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 40,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D3 (2.1): h=44.9 — удержание ON",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 20,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:true",
+            "cold:false",
+            "rain:false",
+            "lowTank:false",
+            "pumpFits:true"
+          ]
+        },
+        {
+          "number": 2,
+          "input": {
+            "humidity": 44.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": true,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false",
+            "pumpFits:true"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D4 (2.1): h=45 — выключение",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 45,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:true",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    }
+  ],
+  "candidate": [
+    {
+      "name": "D1 (2.1): h=39.9 — старт полива",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 39.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": false,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D2 (2.1): h=40 — граница, удержание",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 40,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D3 (2.1): h=44.9 — удержание ON",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 20,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:true",
+            "cold:false",
+            "rain:false",
+            "lowTank:false",
+            "pumpFits:true"
+          ]
+        },
+        {
+          "number": 2,
+          "input": {
+            "humidity": 44.9,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": true,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "actual": {
+            "pump": true,
+            "vent": false,
+            "fault": false,
+            "used": 2
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:false",
+            "cold:false",
+            "rain:false",
+            "lowTank:false",
+            "pumpFits:true"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D4 (2.1): h=45 — выключение",
+      "steps": [
+        {
+          "number": 1,
+          "input": {
+            "humidity": 45,
+            "temp": 20,
+            "age": 0,
+            "tank": 50,
+            "budget": 5,
+            "rain": false,
+            "reset": false
+          },
+          "before": {
+            "pump": false,
+            "vent": false,
+            "fault": false
+          },
+          "expected": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "actual": {
+            "pump": false,
+            "vent": false,
+            "fault": false,
+            "used": 0
+          },
+          "pass": true,
+          "reason": "NORMAL",
+          "trace": [
+            "valid:true",
+            "fresh:true",
+            "latched:false",
+            "ventStart:false",
+            "ventStop:true",
+            "pumpStart:false",
+            "pumpStop:true",
+            "cold:false",
+            "rain:false",
+            "lowTank:false"
+          ]
+        }
+      ]
+    }
+  ],
+  "baselinePass": false,
+  "candidatePass": false,
+  "coverage": {
+    "covered": [
+      "valid:true",
+      "fresh:true",
+      "latched:false",
+      "ventStart:false",
+      "ventStop:true",
+      "pumpStart:false",
+      "pumpStop:false",
+      "cold:false",
+      "rain:false",
+      "lowTank:false",
+      "pumpStart:true",
+      "pumpFits:true",
+      "pumpStop:true"
+    ],
+    "missing": [
+      "valid:false",
+      "fresh:false",
+      "latched:true",
+      "ventStart:true",
+      "ventStop:false",
+      "cold:true",
+      "rain:true",
+      "lowTank:true",
+      "ventFits:true",
+      "ventFits:false",
+      "pumpFits:false"
+    ],
+    "total": 24,
+    "percent": 54
+  },
+  "mutations": [
+    {
+      "id": "M1",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M2",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M3",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M4",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M5",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M6",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M7",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    },
+    {
+      "id": "M8",
+      "killed": false,
+      "killedBy": [],
+      "status": "blocked: correct expectations first"
+    }
+  ],
+  "mutationScore": null
+}
+
+Учебные исходы решений, не покрытие всего JavaScript. Контрольная реализация не заменяет независимый оракул.
