@@ -159,5 +159,12 @@
       {"input": {"humidity": 50, "temp": 20, "age": 0, "tank": 50, "budget": 5, "rain": false, "reset": false},
        "expected": {"pump": false, "vent": false, "fault": false, "used": 0}}
     ]
+  },
+    {
+    "name": "T15: убиваем M1 — граница 35 при выключенном насосе",
+    "steps": [
+      {"input": {"humidity": 35, "temp": 20, "age": 0, "tank": 50, "budget": 5, "rain": false, "reset": false},
+       "expected": {"pump": false, "vent": false, "fault": false, "used": 0}}
+    ]
   }
 ]
